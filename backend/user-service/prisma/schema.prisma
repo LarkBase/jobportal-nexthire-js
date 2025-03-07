@@ -23,10 +23,22 @@ model User {
   interviewsAttended Interview[] @relation(name: "CandidateInterview")
   auditLogs  AuditLog[] @relation("UserAuditLogs")
   createdRoles Role[] @relation(name: "CreatedRoles")
+  refreshTokens RefreshToken[]
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
   @@index([email]) // Index for faster lookup
+}
+
+model RefreshToken {
+  id         String   @id @default(uuid())
+  token      String   @unique
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+
+  @@index([token]) // Faster lookup for refresh token validation
 }
 
 model Role {

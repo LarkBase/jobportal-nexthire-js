@@ -3,6 +3,7 @@ const { seedRoles } = require('./roles');
 const { seedPermissions } = require('./permissions');
 const { seedRolePermissions } = require('./rolePermissions');
 const { seedUsers } = require('./users');
+const { seedDepartments } = require('./departments');
 
 const prisma = new PrismaClient();
 
@@ -11,7 +12,8 @@ async function main() {
 
   await seedRoles();
   await seedPermissions();
-  await seedRolePermissions();  // ✅ Add Role-Permission Seeding
+  await seedRolePermissions(); 
+  await seedDepartments();
   await seedUsers();
 
   console.log('🎉 Seeding Completed Successfully!');
