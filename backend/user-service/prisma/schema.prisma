@@ -1,0 +1,179 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String   @id @default(uuid())
+  email      String   @unique
+  password   String?  // Nullable if using OAuth
+  role       Role?    @relation(name: "UserRole", fields: [roleId], references: [id])
+  roleId     String?
+  department Department? @relation(fields: [departmentId], references: [id])
+  departmentId String?
+  customPermissions UserPermission[]
+  invites    Invite[] @relation("UserInvites")
+  jobs       Job[] @relation("UserJobs")
+  applications Application[] @relation("UserApplications")
+  interviewsConducted Interview[] @relation(name: "InterviewerInterview")
+  interviewsAttended Interview[] @relation(name: "CandidateInterview")
+  auditLogs  AuditLog[] @relation("UserAuditLogs")
+  createdRoles Role[] @relation(name: "CreatedRoles")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([email]) // Index for faster lookup
+}
+
+model Role {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  createdBy   User?     @relation(name: "CreatedRoles", fields: [createdById], references: [id])
+  createdById String?
+  permissions RolePermission[]
+  users       User[] @relation(name: "UserRole")
+  invites     Invite[] @relation("RoleInvites")
+  createdAt   DateTime @default(now())
+}
+
+model Permission {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  roles       RolePermission[]
+  users       UserPermission[]
+}
+
+model RolePermission {
+  id          String   @id @default(uuid())
+  role        Role     @relation(fields: [roleId], references: [id])
+  roleId      String
+  permission  Permission @relation(fields: [permissionId], references: [id])
+  permissionId String
+}
+
+model UserPermission {
+  id          String   @id @default(uuid())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  permission  Permission @relation(fields: [permissionId], references: [id])
+  permissionId String
+}
+
+model Department {
+  id         String   @id @default(uuid())
+  name       String   @unique
+  users      User[]
+  invites    Invite[] @relation("DepartmentInvites")
+}
+
+model Invite {
+  id         String   @id @default(uuid())
+  email      String   @unique
+  role       Role     @relation("RoleInvites", fields: [roleId], references: [id])
+  roleId     String
+  department Department? @relation("DepartmentInvites", fields: [departmentId], references: [id])
+  departmentId String?
+  user        User? @relation("UserInvites", fields: [userId], references: [id])
+  userId      String?
+  token      String   @unique
+  expiresAt  DateTime
+  used       Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  @@index([email, token]) // Index for faster lookup on invites
+}
+
+model Job {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  postedBy    User     @relation("UserJobs", fields: [postedById], references: [id])
+  postedById  String
+  levels      JobLevel[]
+  applications Application[]
+  interviews  Interview[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([title]) // Index for faster job search
+}
+
+model JobLevel {
+  id          String   @id @default(uuid())
+  job         Job      @relation(fields: [jobId], references: [id])
+  jobId       String
+  level       LevelType
+  createdAt   DateTime @default(now())
+}
+
+enum LevelType {
+  L1
+  L2
+  L3
+}
+
+model Application {
+  id          String   @id @default(uuid())
+  candidate   User     @relation("UserApplications", fields: [candidateId], references: [id])
+  candidateId String
+  job         Job      @relation(fields: [jobId], references: [id])
+  jobId       String
+  status      ApplicationStatus @default(PENDING)
+  currentLevel LevelType?
+  rejectionReason RejectionReason?
+  createdAt   DateTime @default(now())
+
+  @@index([candidateId, jobId]) // Faster application tracking
+}
+
+enum ApplicationStatus {
+  PENDING
+  REJECTED
+  ACCEPTED
+}
+
+enum RejectionReason {
+  NONE
+  AI_DETECTED
+  PROXY_DETECTED
+  SKILL_MISMATCH
+  OTHER
+}
+
+model Interview {
+  id          String   @id @default(uuid())
+  candidate   User     @relation(name: "CandidateInterview", fields: [candidateId], references: [id])
+  candidateId String
+  job         Job      @relation(fields: [jobId], references: [id])
+  jobId       String
+  interviewer User?    @relation(name: "InterviewerInterview", fields: [interviewerId], references: [id])
+  interviewerId String?
+  aiAssessment Boolean @default(false)
+  status      InterviewStatus @default(SCHEDULED)
+  interviewLevel LevelType
+  comments    String?
+  rejectionReason RejectionReason?
+  createdAt   DateTime @default(now())
+
+  @@index([candidateId, jobId, interviewLevel]) // Faster candidate interview tracking
+}
+
+enum InterviewStatus {
+  SCHEDULED
+  COMPLETED
+  FAILED
+}
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  action      String
+  performedBy User     @relation("UserAuditLogs", fields: [performedById], references: [id])
+  performedById String
+  timestamp   DateTime @default(now())
+
+  @@index([performedById, timestamp])
+}
