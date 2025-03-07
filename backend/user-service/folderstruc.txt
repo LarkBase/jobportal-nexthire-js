@@ -66,6 +66,96 @@ user-service/
 └── Dockerfile
 
 
+
+
+
+user-service/
+├── .env
+├── .gitignore
+├── Dockerfile
+├── package.json
+├── package-lock.json
+├── README.md
+│
+├── prisma/
+│   ├── schema.prisma
+│   ├── migrations/
+│   │   ├── 20231010120000_init/
+│   │   └── ...
+│   ├── seed/
+│   │   ├── roles.js
+│   │   ├── permissions.js
+│   │   ├── rolePermissions.js
+│   │   ├── users.js
+│   │   ├── index.js
+│   └── seed.ts
+│
+├── src/
+│   ├── config/
+│   │   ├── db.js           ✅ (Moved from models/)
+│   │   ├── redis.js
+│   │   ├── authConfig.js   ✅ (Renamed from jwt.js)
+│   │   ├── env.js          ✅ (Centralized env loading)
+│   │   ├── roles.js
+│   │   ├── server.js       ✅ (New server configuration)
+│   │   └── index.js
+│   │
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   ├── userController.js
+│   │   ├── roleController.js
+│   │   ├── inviteController.js
+│   │
+│   ├── middleware/
+│   │   ├── authMiddleware.js
+│   │   ├── roleMiddleware.js
+│   │   ├── inviteMiddleware.js
+│   │   ├── errorHandler.js
+│   │
+│   ├── routes/
+│   │   ├── authRoutes.js
+│   │   ├── userRoutes.js
+│   │   ├── roleRoutes.js
+│   │   ├── inviteRoutes.js
+│   │
+│   ├── services/
+│   │   ├── authService.js
+│   │   ├── userService.js
+│   │   ├── roleService.js
+│   │   ├── inviteService.js
+│   │   ├── emailService.js
+│   │
+│   ├── utils/
+│   │   ├── logger.js
+│   │   ├── validation.js
+│   │   ├── helpers.js
+│   │   ├── constants.js
+│   │   ├── permissions.js
+│   │
+│   ├── validators/
+│   │   ├── authValidators.js
+│   │   ├── userValidators.js
+│   │   ├── roleValidators.js
+│   │   ├── inviteValidators.js
+│   │
+│   ├── tests/
+│   │   ├── unit/
+│   │   │   ├── auth.test.js
+│   │   │   ├── user.test.js
+│   │   │   ├── role.test.js
+│   │   │   └── invite.test.js
+│   │   └── integration/
+│   │       ├── auth.test.js
+│   │       ├── user.test.js
+│   │       ├── role.test.js
+│   │       └── invite.test.js
+│   │
+│  
+│   ├── server.js          ✅ (Main server entry file)
+│   │
+└── Dockerfile
+
+
 Explanation of the Structure
 1. Root Level Files
 .env: Environment variables (e.g., database credentials, JWT secret, email credentials).
@@ -204,3 +294,45 @@ Input validation is enforced for all routes.
 Testing:
 
 Unit and integration tests ensure reliability and maintainability.
+
+
+
+📌 1️⃣ Audit Logs (audit-%DATE%.log)
+Purpose: Tracks critical system actions for security, compliance, and monitoring.
+✅ Captures WHO performed WHAT action, WHEN, and WHERE.
+
+🔹 Events Recorded in Audit Logs
+Event Type	Example Log Message
+User Login	"User john@nexthire.tech logged in successfully."
+User Logout	"User john@nexthire.tech logged out."
+Role Assigned	"User HR_ADMIN assigned role RECRUITER_ADMIN to user candidate1@nexthire.tech."
+Permission Changed	"User SUPER_ADMIN granted permission MANAGE_USERS to HR_ADMIN."
+User Invited	"HR_ADMIN invited candidate1@nexthire.tech to the platform."
+Job Created	"Recruiter posted a new job: 'Senior Backend Engineer'."
+Interview Scheduled	"Interview scheduled for candidate Alex on 2024-04-10."
+System Configuration Change	"Super Admin updated system settings."
+User Deactivated	"User recruiter2@nexthire.tech was deactivated."
+🔍 Stored in → logs/audit-%DATE%.log
+
+📌 2️⃣ Auth Logs (auth-%DATE%.log)
+Purpose: Tracks authentication-related activities such as login, logout, failed attempts, and suspicious behavior.
+✅ Captures WHO attempted authentication, WHEN, and the result.
+
+🔹 Events Recorded in Auth Logs
+Event Type	Example Log Message
+User Login Success	"User recruiter@nexthire.tech logged in successfully."
+User Logout	"User candidate1@nexthire.tech logged out."
+Failed Login Attempt	"Failed login attempt for user candidate1@nexthire.tech."
+Invalid Token Attempt	"User tried accessing protected route with invalid token."
+Unauthorized Access	"Blocked unauthorized access attempt to /api/admin by IP 192.168.1.10."
+Multiple Failed Logins	"Multiple failed login attempts detected for user hr@nexthire.tech. Possible brute force."
+Password Reset Request	"User john@nexthire.tech requested a password reset."
+🔍 Stored in → logs/auth-%DATE%.log
+
+🔹 Key Differences Between Audit & Auth Logs
+Feature	Audit Logs (audit-%DATE%.log)	Auth Logs (auth-%DATE%.log)
+Purpose	Tracks critical system actions	Tracks authentication activities
+Who Triggers?	Admins, Recruiters, System	Users, Attackers (failed login attempts)
+Examples	Role changes, Job posts, Interviews	Login, Logout, Failed Login, Token Issues
+Security Impact	High (tracks admin & system events)	Medium (tracks user authentication issues)
+Used For	Compliance, Security Audits, Investigations	Security Monitoring, Account Protection

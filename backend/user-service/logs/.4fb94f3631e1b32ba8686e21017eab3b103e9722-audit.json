@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Users/lark/Documents/GitHub/jobportal-nexthire-js/backend/user-service/logs/.4fb94f3631e1b32ba8686e21017eab3b103e9722-audit.json",
+    "files": [
+        {
+            "date": 1741384286522,
+            "name": "/Users/lark/Documents/GitHub/jobportal-nexthire-js/backend/user-service/logs/combined-2025-03-08.log",
+            "hash": "40d3c5f5a968b3114d4a1f615abb7240d4bf2d2e96cb42c2ae3a148b6997930c"
+        }
+    ],
+    "hashType": "sha256"
+}
