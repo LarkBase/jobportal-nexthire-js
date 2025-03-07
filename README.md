@@ -85,6 +85,46 @@ Welcome to the **next-generation AI-driven job portal**, built for **futuristic 
 4. **📈 Real-time Monitoring** (Prometheus + Grafana dashboards)
 
 ---
+### **🔑 Role Hierarchy & Invite System**
+
+#### **🛡️ Super Admin (Highest Privileges)**
+- Can **create & manage Department Admins**.
+- Has **full access** to **all hiring processes & system settings**.
+- Can **view and modify permissions for all roles**.
+
+#### **👥 Department-Based Admins (HR, Recruiter, Tech Interview)**
+| **Role**               | **Manages**                          | **Permissions** |
+|------------------------|------------------------------------|----------------|
+| **HR Admin**           | HR Team Members                    | Invite HR members, oversee candidate hiring pipeline |
+| **Recruiter Admin**    | Recruiters                         | Invite recruiters, manage job postings & candidate tracking |
+| **Tech Interview Admin** | Technical Interviewers           | Invite Tech Panel members, assign technical evaluations |
+
+- **Each admin invites their respective team members** (who become **permanent members**).
+- **All Department Admins report to Super Admins.**
+
+### **📝 Fine-Grained Permission Levels**  
+| **Action**               | **Super Admin** | **HR Admin** | **Recruiter Admin** | **Tech Interview Admin** | **HR** | **Recruiter** | **Tech Panel** | **Candidate** |
+|--------------------------|----------------|--------------|-----------------|--------------------|------|------------|------------|------------|
+| **Invite Dept Members**  | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Invite Candidates**    | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Create Job Listings**  | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| **Edit Job Listings**    | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| **Delete Job Listings**  | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| **View Candidate Details** | ✅ | ✅ | ✅ (Assigned only) | ✅ (Assigned only) | ✅ | ✅ | ✅ | ❌ |
+| **Conduct AI Interviews** | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ | ✅ (Assigned only) | ✅ (One-time) |
+| **View Interview Results** | ✅ | ✅ | ✅ (Assigned only) | ✅ (Assigned only) | ✅ | ✅ | ✅ | ❌ |
+| **Send Job Offer**        | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| **Accept/Reject Offer**   | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+
+---
+## **🕵️‍♂️ Candidate Access Rules**
+✅ **Candidates receive a One-Time Access Invite** via email.
+✅ **Token expires after the interview session ends**.
+✅ **They can only enter the AI interview room once** and **cannot rejoin**.
+✅ **Candidates cannot see any interview results, recruiter comments, or job status**.
+✅ **They will automatically be logged out after interview completion**.
+
+---
 ## 🚀 Quickstart Guide
 ### **1️⃣ Clone & Setup**
 ```sh
@@ -113,43 +153,6 @@ kubectl apply -f k8s/
 3. **Commit & Push** (`git commit -m "Add feature xyz" && git push origin feature-xyz`)
 4. **Submit a Pull Request** 🚀
 
-
-Updated Fine-Grained Permission Levels
-Action	Super Admin	HR Admin	Recruiter Admin	Tech Interview Admin	HR	Recruiter	Tech Panel	Candidate
-Invite Dept Members	✅	✅	✅	✅	❌	❌	❌	❌
-Invite Candidates	✅	✅	✅	✅	❌	❌	❌	❌
-Create Job Listings	✅	❌	✅	❌	❌	✅	❌	❌
-Edit Job Listings	✅	❌	✅	❌	❌	✅	❌	❌
-Delete Job Listings	✅	❌	✅	❌	❌	✅	❌	❌
-View Candidate Details	✅	✅	✅ (Assigned only)	✅ (Assigned only)	✅	✅	✅	❌
-Conduct AI Interviews	✅	❌	❌	✅	❌	❌	✅ (Assigned only)	✅ (One-time)
-View Interview Results	✅	✅	✅ (Assigned only)	✅ (Assigned only)	✅	✅	✅	❌
-Send Job Offer	✅	✅	✅	❌	❌	✅	❌	❌
-Accept/Reject Offer	❌	❌	❌	❌	❌	❌	❌	✅
-🕵️‍♂️ Candidate Access Rules
-✅ Candidates receive a One-Time Access Invite via email.
-✅ Token expires after the interview session ends.
-✅ They can only enter the AI interview room once and cannot rejoin.
-✅ Candidates cannot see any interview results, recruiter comments, or job status.
-✅ They will automatically be logged out after interview completion.
-
-🔧 Implementation Plan
-🔑 Role-Based Authentication System
-
-JWT-based auth with department-level roles & granular permissions.
-Admins can only manage users within their department.
-📩 One-Time Candidate Invite System
-
-Candidates receive a one-time token that expires after the AI interview.
-Recruiters/Admins send invites only when needed.
-🛠️ Backend Security & Access Control
-
-API middleware restricts access based on assigned roles.
-Role-Permission DB structure updated for departmental segregation.
-📊 Admin Panel for Super Admins & Dept Admins
-
-Super Admins can monitor all department activities.
-Department Admins can only manage their teams.
 
 ---
 ## 📜 License
