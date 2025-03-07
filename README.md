@@ -85,19 +85,21 @@ Welcome to the **next-generation AI-driven job portal**, built for **futuristic 
 4. **📈 Real-time Monitoring** (Prometheus + Grafana dashboards)
 
 ---
+
 ### **🔑 Role Hierarchy & Invite System**
 
 #### **🛡️ Super Admin (Highest Privileges)**
 - Can **create & manage Department Admins**.
 - Has **full access** to **all hiring processes & system settings**.
 - Can **view and modify permissions for all roles**.
+- Can **assign permissions to individual users**.
 
 #### **👥 Department-Based Admins (HR, Recruiter, Tech Interview)**
 | **Role**               | **Manages**                          | **Permissions** |
 |------------------------|------------------------------------|----------------|
-| **HR Admin**           | HR Team Members                    | Invite HR members, oversee candidate hiring pipeline |
-| **Recruiter Admin**    | Recruiters                         | Invite recruiters, manage job postings & candidate tracking |
-| **Tech Interview Admin** | Technical Interviewers           | Invite Tech Panel members, assign technical evaluations |
+| **HR Admin**           | HR Team Members                    | Invite HR members, oversee candidate hiring pipeline, manage HR roles & permissions |
+| **Recruiter Admin**    | Recruiters                         | Invite recruiters, manage job postings & candidate tracking, manage recruiter roles & permissions |
+| **Tech Interview Admin** | Technical Interviewers           | Invite Tech Panel members, assign technical evaluations, manage tech roles & permissions |
 
 - **Each admin invites their respective team members** (who become **permanent members**).
 - **All Department Admins report to Super Admins.**
@@ -105,6 +107,9 @@ Welcome to the **next-generation AI-driven job portal**, built for **futuristic 
 ### **📝 Fine-Grained Permission Levels**  
 | **Action**               | **Super Admin** | **HR Admin** | **Recruiter Admin** | **Tech Interview Admin** | **HR** | **Recruiter** | **Tech Panel** | **Candidate** |
 |--------------------------|----------------|--------------|-----------------|--------------------|------|------------|------------|------------|
+| **Create Custom Roles**  | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Assign Role Permissions** | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Assign Individual User Permissions** | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
 | **Invite Dept Members**  | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
 | **Invite Candidates**    | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
 | **Create Job Listings**  | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
