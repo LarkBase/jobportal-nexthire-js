@@ -106,7 +106,7 @@ Welcome to the **next-generation AI-driven job portal**, built for **futuristic 
 | **Action**               | **Super Admin** | **HR Admin** | **Recruiter Admin** | **Tech Interview Admin** | **HR** | **Recruiter** | **Tech Panel** | **Candidate** |
 |--------------------------|----------------|--------------|-----------------|--------------------|------|------------|------------|------------|
 | **Invite Dept Members**  | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
-| **Invite Candidates**    | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Invite Candidates**    | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
 | **Create Job Listings**  | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
 | **Edit Job Listings**    | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
 | **Delete Job Listings**  | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
@@ -124,7 +124,6 @@ Welcome to the **next-generation AI-driven job portal**, built for **futuristic 
 ✅ **Candidates cannot see any interview results, recruiter comments, or job status**.
 ✅ **They will automatically be logged out after interview completion**.
 
----
 ## 🚀 Quickstart Guide
 ### **1️⃣ Clone & Setup**
 ```sh
