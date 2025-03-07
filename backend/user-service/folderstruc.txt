@@ -1,0 +1,206 @@
+user-service/
+├── .env
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── README.md
+├── prisma/
+│   ├── schema.prisma
+│   ├── migrations/
+│   │   ├── 20231010120000_init/
+│   │   └── ...
+│   └── seed.ts
+├── src/
+│   ├── config/
+│   │   ├── db.js
+│   │   ├── redis.js
+│   │   ├── jwt.js
+│   │   ├── roles.js
+│   │   └── index.js
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   ├── userController.js
+│   │   ├── roleController.js
+│   │   └── inviteController.js
+│   ├── middleware/
+│   │   ├── authMiddleware.js
+│   │   ├── roleMiddleware.js
+│   │   ├── inviteMiddleware.js
+│   │   └── errorHandler.js
+│   ├── models/
+│   │   └── prismaClient.js
+│   ├── routes/
+│   │   ├── authRoutes.js
+│   │   ├── userRoutes.js
+│   │   ├── roleRoutes.js
+│   │   └── inviteRoutes.js
+│   ├── services/
+│   │   ├── authService.js
+│   │   ├── userService.js
+│   │   ├── roleService.js
+│   │   ├── inviteService.js
+│   │   └── emailService.js
+│   ├── utils/
+│   │   ├── logger.js
+│   │   ├── validation.js
+│   │   ├── helpers.js
+│   │   ├── constants.js
+│   │   └── permissions.js
+│   ├── validators/
+│   │   ├── authValidators.js
+│   │   ├── userValidators.js
+│   │   ├── roleValidators.js
+│   │   └── inviteValidators.js
+│   ├── tests/
+│   │   ├── unit/
+│   │   │   ├── auth.test.js
+│   │   │   ├── user.test.js
+│   │   │   ├── role.test.js
+│   │   │   └── invite.test.js
+│   │   └── integration/
+│   │       ├── auth.test.js
+│   │       ├── user.test.js
+│   │       ├── role.test.js
+│   │       └── invite.test.js
+│   └── app.js
+└── Dockerfile
+
+
+Explanation of the Structure
+1. Root Level Files
+.env: Environment variables (e.g., database credentials, JWT secret, email credentials).
+
+.gitignore: Specifies files and folders to ignore in version control.
+
+package.json & package-lock.json: Manage dependencies and scripts.
+
+README.md: Documentation for the project.
+
+Dockerfile: For containerizing the microservice.
+
+2. src/ Directory
+config/
+db.js: Database connection setup.
+
+redis.js: Redis connection setup (for caching or session management).
+
+jwt.js: JWT configuration (e.g., secret, expiration).
+
+roles.js: Predefined roles and permissions (e.g., Super Admin, HR Admin, Recruiter Admin, etc.).
+
+index.js: Centralized configuration exports.
+
+controllers/
+authController.js: Handles login, token refresh, and logout.
+
+userController.js: Handles user-related operations (e.g., CRUD, assigning roles).
+
+roleController.js: Handles role creation, modification, and permission assignment.
+
+inviteController.js: Handles invite creation, validation, and team member onboarding.
+
+middleware/
+authMiddleware.js: Verifies JWT tokens and authenticates users.
+
+roleMiddleware.js: Checks user roles for authorization.
+
+inviteMiddleware.js: Validates invite tokens and ensures proper onboarding.
+
+errorHandler.js: Centralized error handling.
+
+models/
+User.js: User schema and methods.
+
+Role.js: Role schema and methods.
+
+Invite.js: Invite schema for managing team member invitations.
+
+Permission.js: Permission schema for fine-grained access control.
+
+routes/
+authRoutes.js: Routes for authentication (e.g., /login, /logout, /refresh-token).
+
+userRoutes.js: Routes for user operations (e.g., /users, /users/:id).
+
+roleRoutes.js: Routes for role operations (e.g., /roles, /roles/:id).
+
+inviteRoutes.js: Routes for invite operations (e.g., /invites, /invites/validate).
+
+services/
+authService.js: Handles authentication logic (e.g., password validation, token generation).
+
+userService.js: Handles user-related business logic (e.g., CRUD, role assignment).
+
+roleService.js: Handles role-related business logic (e.g., role creation, permission assignment).
+
+inviteService.js: Handles invite creation, validation, and team member onboarding.
+
+emailService.js: Handles email notifications (e.g., invite emails).
+
+utils/
+logger.js: Centralized logging (e.g., using Winston).
+
+validation.js: Custom validation functions.
+
+helpers.js: Helper functions (e.g., generating random strings, formatting responses).
+
+constants.js: Constants (e.g., error messages, status codes).
+
+permissions.js: Utility functions for checking and assigning permissions.
+
+validators/
+authValidators.js: Validation for authentication routes.
+
+userValidators.js: Validation for user routes.
+
+roleValidators.js: Validation for role routes.
+
+inviteValidators.js: Validation for invite routes.
+
+tests/
+unit/: Unit tests for individual components.
+
+integration/: Integration tests for API endpoints.
+
+app.js
+Main application file (initializes Express, middleware, and routes).
+
+3. Dockerfile
+Used to containerize the microservice for deployment.
+
+Key Features of the Structure
+Role Hierarchy:
+
+Roles and permissions are defined in config/roles.js.
+
+Fine-grained permissions are enforced using roleMiddleware.js and permissions.js.
+
+Invite System:
+
+Invites are managed via the Invite model and inviteController.js.
+
+Invite validation and onboarding are handled by inviteMiddleware.js.
+
+No Registration:
+
+Only login functionality is implemented in authController.js.
+
+New users are onboarded via invites.
+
+Scalability:
+
+Modular structure allows easy addition of new roles, permissions, or features.
+
+Redis can be used for caching frequently accessed data (e.g., roles, permissions).
+
+Security:
+
+JWT tokens are used for authentication.
+
+Passwords are hashed before storage.
+
+Input validation is enforced for all routes.
+
+Testing:
+
+Unit and integration tests ensure reliability and maintainability.
