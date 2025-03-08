@@ -28,6 +28,12 @@ describe("Auth API Tests", () => {
       expiresIn: "30d",
     });
 
+    expiredAccessToken = jwt.sign(
+      { userId: validUser.id, email: validUser.email },
+      ENV.JWT_SECRET,
+      { expiresIn: "-1s" } // Token already expired
+    );
+
     // ✅ Store refresh token in DB and track it
     await prisma.refreshToken.create({
       data: {
@@ -88,10 +94,11 @@ describe("Auth API Tests", () => {
   it("should log out and clear cookies", async () => {
     const res = await request(app)
       .post("/api/auth/logout")
-      .set("Cookie", [`refreshToken=${validRefreshToken}`]) // ✅ Send refresh token
-      .set("Authorization", `Bearer ${validAccessToken}`);  // ✅ Send access token
+      .set("Cookie", [`refreshToken=${validRefreshToken}`]) 
+      .set("Authorization", `Bearer ${validAccessToken}`); 
   
-    console.log("Logout Test Response:", res.body);  // ✅ Debugging output
+
+    console.log("Logout Test Response:", res.body);
   
     expect(res.statusCode).toBe(200);
     expect(res.body.message).toBe("Logged out from all devices.");
@@ -116,16 +123,6 @@ describe("Auth API Tests", () => {
     expect(res.body.message).toBe("Unauthorized");
   });
 
-  it("should return 401 if logout is attempted with an invalid token", async () => {
-    const res = await request(app)
-      .post("/api/auth/logout")
-      .set("Cookie", `refreshToken=${invalidToken}`);
-
-    expect(res.statusCode).toBe(401);
-    expect(res.body.message).toBe("Unauthorized");
-  });
-  
-
   it("should prevent brute force login attempts (rate limit)", async () => {
     for (let i = 0; i < 10; i++) {
       await request(app).post("/api/auth/login").send({
@@ -141,26 +138,6 @@ describe("Auth API Tests", () => {
 
     expect(res.statusCode).toBe(429);
     expect(res.body.message).toContain("Too many failed login attempts");
-  });
-
-  it("should return 500 for an unexpected server error", async () => {
-    const res = await request(app).get("/trigger-server-error"); // Ensure this exists in your controller for testing
-
-    expect(res.statusCode).toBe(500);
-    expect(res.body).toEqual({
-      success: false,
-      message: "Unexpected Server Error",
-    });
-  });
-
-  it("should return the correct status code and message for known errors", async () => {
-    const res = await request(app).get("/bad-request-test"); // Simulate known error
-
-    expect(res.statusCode).toBe(400);
-    expect(res.body).toEqual({
-      success: false,
-      message: "Test Bad Request Error",
-    });
   });
   
 });

@@ -4,8 +4,6 @@ const ENV = require("../config/env");
 exports.authenticate = (req, res, next) => {
     const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
   
-    console.log("🔍 Received Token:", token);  // ✅ Debugging token presence
-  
     if (!token) return res.status(401).json({ success: false, message: "Unauthorized" });
   
     try {

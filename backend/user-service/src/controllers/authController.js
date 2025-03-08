@@ -53,7 +53,7 @@ exports.logout = async (req, res) => {
       const email = req.user?.email || "Unknown User"; 
   
       if (!refreshToken) {
-        return res.status(401).json({ success: false, message: "Unauthorized" }); // ✅ Handle missing refresh token
+        return res.status(401).json({ success: false, message: "Unauthorized" }); 
       }
   
       await authService.logoutAllSessions(refreshToken);
