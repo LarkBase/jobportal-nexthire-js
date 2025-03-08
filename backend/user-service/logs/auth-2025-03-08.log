@@ -4,3 +4,63 @@
 {"level":"info","message":"User admin@nexthire.tech logged in successfully from IP: ::1","timestamp":"2025-03-08 04:29:54"}
 {"level":"info","message":"User admin@nexthire.tech logged in successfully from IP: ::1","timestamp":"2025-03-08 04:34:41"}
 {"level":"info","message":"User logged out from all sessions.","timestamp":"2025-03-08 04:45:07"}
+{"level":"info","message":"User admin@nexthire.tech logged in successfully from IP: ::1","timestamp":"2025-03-08 04:48:00"}
+{"level":"info","message":"User admin@nexthire.tech logged in successfully from IP: ::1","timestamp":"2025-03-08 04:48:02"}
+{"level":"info","message":"User admin@nexthire.tech logged in successfully from IP: ::1","timestamp":"2025-03-08 04:48:03"}
+{"level":"info","message":"User hr_admin@nexthire.tech logged in successfully from IP: ::1","timestamp":"2025-03-08 04:48:28"}
+{"level":"info","message":"User logged out from all sessions.","timestamp":"2025-03-08 04:48:44"}
+{"level":"info","message":"User hr_admin@nexthire.tech logged in successfully from IP: ::1","timestamp":"2025-03-08 04:48:52"}
+{"level":"info","message":"User logged out from all sessions.","timestamp":"2025-03-08 04:48:55"}
+{"level":"info","message":"User admin@nexthire.tech logged in successfully from IP: ::1","timestamp":"2025-03-08 04:49:20"}
+{"level":"info","message":"User logged out from all sessions.","timestamp":"2025-03-08 04:49:24"}
+{"level":"info","message":"User admin@nexthire.tech logged in successfully from IP: ::1","timestamp":"2025-03-08 04:53:22"}
+{"level":"info","message":"User admin@nexthire.tech logged out from all sessions.","timestamp":"2025-03-08 04:53:33"}
+{"level":"info","message":"User admin@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:04:38"}
+{"level":"info","message":"User admin@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:28:50"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:29:48"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:31:42"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:32:49"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:34:08"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:35:33"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:37:00"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:37:47"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:38:18"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:39:40"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:41:19"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:42:53"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:44:59"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:45:46"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:46:46"}
+{"level":"info","message":"User testuser@nexthire.tech logged out from all sessions.","timestamp":"2025-03-08 05:46:46"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:47:13"}
+{"level":"info","message":"User testuser@nexthire.tech logged out from all sessions.","timestamp":"2025-03-08 05:47:13"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:51:46"}
+{"level":"info","message":"User testuser@nexthire.tech logged out from all sessions.","timestamp":"2025-03-08 05:51:46"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:52:38"}
+{"level":"info","message":"User testuser@nexthire.tech logged out from all sessions.","timestamp":"2025-03-08 05:52:38"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:53:17"}
+{"level":"info","message":"User testuser@nexthire.tech logged out from all sessions.","timestamp":"2025-03-08 05:53:18"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:54:10"}
+{"level":"info","message":"User testuser@nexthire.tech logged out from all sessions.","timestamp":"2025-03-08 05:54:11"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:55:03"}
+{"level":"info","message":"User testuser@nexthire.tech logged out from all sessions.","timestamp":"2025-03-08 05:55:03"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:55:31"}
+{"level":"info","message":"User testuser@nexthire.tech logged out from all sessions.","timestamp":"2025-03-08 05:55:32"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:55:45"}
+{"level":"info","message":"User testuser@nexthire.tech logged out from all sessions.","timestamp":"2025-03-08 05:55:45"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:57:20"}
+{"level":"info","message":"User testuser@nexthire.tech logged out from all sessions.","timestamp":"2025-03-08 05:57:20"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 05:58:18"}
+{"level":"info","message":"User testuser@nexthire.tech logged out from all sessions.","timestamp":"2025-03-08 05:58:18"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 06:00:45"}
+{"level":"info","message":"User testuser@nexthire.tech logged out from all sessions.","timestamp":"2025-03-08 06:00:45"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 06:04:29"}
+{"level":"info","message":"User testuser@nexthire.tech logged out from all sessions.","timestamp":"2025-03-08 06:04:29"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 06:06:05"}
+{"level":"info","message":"User testuser@nexthire.tech logged out from all sessions.","timestamp":"2025-03-08 06:06:05"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 06:06:42"}
+{"level":"info","message":"User testuser@nexthire.tech logged out from all sessions.","timestamp":"2025-03-08 06:06:42"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 06:07:35"}
+{"level":"info","message":"User testuser@nexthire.tech logged out from all sessions.","timestamp":"2025-03-08 06:07:35"}
+{"level":"info","message":"User testuser@nexthire.tech logged in successfully from IP: ::ffff:127.0.0.1","timestamp":"2025-03-08 06:08:00"}
+{"level":"info","message":"User testuser@nexthire.tech logged out from all sessions.","timestamp":"2025-03-08 06:08:00"}

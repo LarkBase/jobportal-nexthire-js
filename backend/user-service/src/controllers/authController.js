@@ -16,6 +16,7 @@ exports.login = async (req, res) => {
 
     // ✅ Log successful login
     logger.auth.info(`User ${email} logged in successfully from IP: ${ipAddress}`);
+    logger.audit.info(`User ${email} logged in successfully from IP: ${ipAddress}`);
 
     // ✅ Store tokens securely
     res.cookie("token", accessToken, { httpOnly: true, secure: true, sameSite: "Strict" });
@@ -47,19 +48,25 @@ exports.refreshToken = async (req, res) => {
 };
 
 exports.logout = async (req, res) => {
-  try {
-    const refreshToken = req.cookies.refreshToken;
-    if (refreshToken) {
+    try {
+      const refreshToken = req.cookies.refreshToken;
+      const email = req.user?.email || "Unknown User"; 
+  
+      if (!refreshToken) {
+        return res.status(401).json({ success: false, message: "Unauthorized" }); // ✅ Handle missing refresh token
+      }
+  
       await authService.logoutAllSessions(refreshToken);
+  
+      res.clearCookie("token");
+      res.clearCookie("refreshToken");
+  
+      logger.auth.info(`User ${email} logged out from all sessions.`);
+      logger.audit.info(`User ${email} logged out from all sessions.`);
+  
+      return res.status(200).json({ success: true, message: "Logged out from all devices." });
+    } catch (error) {
+      logger.errorLog.error(`Logout error: ${error.message}`);
+      return res.status(500).json({ success: false, message: "Logout failed." });
     }
-
-    res.clearCookie("token");
-    res.clearCookie("refreshToken");
-
-    logger.auth.info(`User logged out from all sessions.`);
-    return res.status(200).json({ success: true, message: "Logged out from all devices." });
-  } catch (error) {
-    logger.errorLog.error(`Logout error: ${error.message}`);
-    return res.status(500).json({ success: false, message: "Logout failed." });
-  }
-};
+  };
