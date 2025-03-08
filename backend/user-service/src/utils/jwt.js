@@ -16,7 +16,7 @@ const generateToken = (user) => {
 const generateRefreshToken = async (user) => {
   const refreshToken = crypto.randomBytes(64).toString("hex");
   const expiresAt = new Date();
-  expiresAt.setDate(expiresAt.getDate() + 30); // 30 days expiry
+  expiresAt.setDate(expiresAt.getDate() + 7); // 30 days expiry
 
   await prisma.refreshToken.create({
     data: { token: refreshToken, userId: user.id, expiresAt },

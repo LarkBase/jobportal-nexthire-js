@@ -20,6 +20,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+
+app.get("/trigger-server-error", (req, res, next) => {
+    throw new Error("Unexpected Server Error");
+  });
+  
+app.get("/bad-request-test", (req, res, next) => {
+    const error = new Error("Test Bad Request Error");
+    error.statusCode = 400;
+    next(error);
+});
+  
+
 // Routes
 app.use('/api/auth', authRoutes);
 // app.use('/api/users', userRoutes);
