@@ -3,17 +3,43 @@ const prisma = require("../config/db");
 const { generateToken, generateRefreshToken } = require("../utils/jwt");
 
 exports.login = async (email, password) => {
-  const user = await prisma.user.findUnique({ where: { email } });
+  // Fetch user details along with role and department names
+  const user = await prisma.user.findUnique({
+    where: { email },
+    include: {
+      role: {
+        select: { name: true }, // Get role name
+      },
+      department: {
+        select: { name: true }, // Get department name
+      },
+    },
+  });
+
   if (!user) throw new Error("Invalid credentials");
 
+  // Compare the provided password with the stored hash
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) throw new Error("Invalid credentials");
 
+  // Generate tokens
   const accessToken = generateToken(user);
   const refreshToken = await generateRefreshToken(user);
 
-  return { accessToken, refreshToken, user };
+  // Return only the necessary fields
+  return {
+    accessToken,
+    refreshToken,
+    user: {
+      email: user.email,
+      roleId: user.roleId,
+      roleName: user.role?.name, // Fetch role name
+      departmentId: user.departmentId,
+      departmentName: user.department?.name, // Fetch department name
+    },
+  };
 };
+
 
 exports.refreshToken = async (oldRefreshToken) => {
   return await prisma.$transaction(async (prisma) => {
