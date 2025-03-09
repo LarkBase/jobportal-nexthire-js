@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const { errorHandler } = require('../middleware/errorHandler');
 const authRoutes = require('../routes/authRoutes');
 const userRoutes = require('../routes/userRoutes');
+const jobRoutes = require('../routes/jobRoutes');
 // const roleRoutes = require('../routes/roleRoutes');
 // const inviteRoutes = require('../routes/inviteRoutes');
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/jobs', jobRoutes);
 // app.use('/api/roles', roleRoutes);
 // app.use('/api/invites', inviteRoutes);
 

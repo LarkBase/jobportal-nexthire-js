@@ -336,3 +336,28 @@ Who Triggers?	Admins, Recruiters, System	Users, Attackers (failed login attempts
 Examples	Role changes, Job posts, Interviews	Login, Logout, Failed Login, Token Issues
 Security Impact	High (tracks admin & system events)	Medium (tracks user authentication issues)
 Used For	Compliance, Security Audits, Investigations	Security Monitoring, Account Protection
+
+
+
+
+🛠 Backend Features I'll Implement
+MCQ Management
+
+AI-generated & manual question creation.
+Adaptive difficulty logic.
+Test Handling
+
+Start a test session (assigns 15 random questions).
+Auto-submit test after 15 minutes.
+Candidate Responses
+
+Store answers & mark correctness.
+Adaptive difficulty after each response.
+Cheating Detection
+
+Track tab switches, copy-pasting, AI-generated answers.
+Store logs for HR review.
+Evaluation & Scoring
+
+AI-generated feedback & flagging.
+HR/Technical Interviewer review process.
