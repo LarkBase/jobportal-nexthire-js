@@ -199,6 +199,50 @@ enum InterviewStatus {
   FAILED
 }
 
+model TestQuestion {
+  id           String   @id @default(uuid())
+  question     String
+  options      String[]  // Store as array ["Option A", "Option B", "Option C"]
+  correctIndex Int
+  difficulty   DifficultyLevel
+  topic        String
+  createdAt    DateTime @default(now())
+}
+
+enum DifficultyLevel {
+  EASY
+  MEDIUM
+  HARD
+}
+
+model TestSession {
+  id           String   @id @default(uuid())
+  candidate    User     @relation(fields: [candidateId], references: [id])
+  candidateId  String
+  responses    TestResponse[]
+  status       TestStatus @default(IN_PROGRESS)
+  startedAt    DateTime @default(now())
+  expiresAt    DateTime
+}
+
+model TestResponse {
+  id           String   @id @default(uuid())
+  session      TestSession @relation(fields: [sessionId], references: [id])
+  sessionId    String
+  question     TestQuestion @relation(fields: [questionId], references: [id])
+  questionId   String
+  selectedIndex Int?
+  isCorrect    Boolean?
+  responseTime Int  // Time taken for this question in seconds
+  detectedCheat Boolean @default(false) // If cheating is detected
+}
+
+enum TestStatus {
+  IN_PROGRESS
+  COMPLETED
+  EXPIRED
+}
+
 model AuditLog {
   id          String   @id @default(uuid())
   action      String

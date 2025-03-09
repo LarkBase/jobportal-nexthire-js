@@ -8,6 +8,7 @@ const { errorHandler } = require('../middleware/errorHandler');
 const authRoutes = require('../routes/authRoutes');
 const userRoutes = require('../routes/userRoutes');
 const jobRoutes = require('../routes/jobRoutes');
+const testRoutes = require('../routes/testRoutes');
 // const roleRoutes = require('../routes/roleRoutes');
 // const inviteRoutes = require('../routes/inviteRoutes');
 
@@ -25,6 +26,7 @@ app.use(cookieParser());
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/jobs', jobRoutes);
+app.use('/api/tests', testRoutes);
 // app.use('/api/roles', roleRoutes);
 // app.use('/api/invites', inviteRoutes);
 

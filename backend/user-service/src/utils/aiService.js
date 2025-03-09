@@ -81,4 +81,61 @@ const generateJobDescriptionWithAI = async (summary) => {
     }
 };
 
-module.exports = { generateJobDescriptionWithAI };
+const generateMCQsWithAI = async (topic, difficulty, count = 10) => {
+    try {
+        const completion = await openai.chat.completions.create({
+            model: "gpt-4o-mini",
+            temperature: 0.7,
+            messages: [
+                {
+                    role: "system",
+                    content: `You are an expert question generator for technical exams. Generate high-quality multiple-choice questions (MCQs) based on the given topic and difficulty level.
+
+                    **MCQ Format**
+                    - Each MCQ must have a question, exactly **4 answer options**, and **1 correct answer index (0-3)**.
+                    - Questions should be clear and concise.
+                    - The difficulty level must be respected: 
+                      - EASY: Basic fundamental questions.
+                      - MEDIUM: Slightly complex, requiring logical reasoning.
+                      - HARD: Advanced-level questions requiring in-depth understanding.
+
+                    **Output JSON Format**:
+                    {
+                      "questions": [
+                        {
+                          "question": "<MCQ text>",
+                          "options": ["Option A", "Option B", "Option C", "Option D"],
+                          "correctIndex": <0-3>,
+                          "difficulty": "<EASY | MEDIUM | HARD>"
+                        }
+                      ]
+                    }
+
+                    **Important: Output should be in valid JSON format ONLY, no explanations, no markdown.**`
+                },
+                {
+                    role: "user",
+                    content: `Generate ${count} multiple-choice questions for the topic "${topic}" with difficulty level "${difficulty}".`
+                },
+            ],
+        });
+
+        if (!completion.choices || !completion.choices[0].message.content) {
+            throw new Error("OpenAI response is empty or invalid.");
+        }
+
+        let content = completion.choices[0].message.content.trim();
+
+        // Remove triple backticks and ensure clean JSON parsing
+        if (content.startsWith("```json")) {
+            content = content.replace(/^```json/, "").replace(/```$/, "").trim();
+        }
+
+        return JSON.parse(content).questions;
+    } catch (error) {
+        console.error("Error generating MCQs:", error);
+        throw new Error("Failed to generate MCQs.");
+    }
+};
+
+module.exports = { generateJobDescriptionWithAI, generateMCQsWithAI };
